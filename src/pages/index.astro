@@ -1,13 +1,15 @@
 ---
 import About from "../components/index/About.astro";
-import BaseLayout from "../layout/BaseLayout.astro";
 import Blog from "../components/index/Blog.astro";
 import Class from "../components/index/Class.astro";
 import Hero from "../components/index/Hero.astro";
 import Video from "../components/index/Video.astro";
+import Header from "../components/shared/Header.astro";
+import BaseLayout from "../layout/BaseLayout.astro";
 ---
 
 <BaseLayout>
+  <Header />
   <main>
     <article>
       <Hero />
@@ -17,4 +19,7 @@ import Video from "../components/index/Video.astro";
       <Blog />
     </article>
   </main>
+
+  <!-- Functional JS -->
+  <script src="../scripts/script"></script>
 </BaseLayout>

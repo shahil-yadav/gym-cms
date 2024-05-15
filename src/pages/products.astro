@@ -2,6 +2,7 @@
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { EntryFieldTypes } from "contentful";
 import CardContainer from "../components/products/CardContainer.astro";
+import Header from "../components/shared/Header.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
 import { contentfulClient } from "../lib/contentful";
 import { Item } from "../utils/class";
@@ -42,7 +43,14 @@ const products = await Promise.all(
 );
 ---
 
+<style>
+  main {
+    padding-block-start: calc(var(--section-padding));
+  }
+</style>
+
 <BaseLayout>
+  <Header />
   <main>
     <CardContainer
       sectionTitle="Nutrition & Proteins"
@@ -50,4 +58,8 @@ const products = await Promise.all(
       items={products}
     />
   </main>
+  <script>
+    const header = document.querySelector("[data-header]");
+    header && header.classList.add("active");
+  </script>
 </BaseLayout>
