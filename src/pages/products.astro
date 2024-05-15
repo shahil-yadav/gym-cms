@@ -58,8 +58,10 @@ const products = await Promise.all(
       items={products}
     />
   </main>
+
   <script>
     const header = document.querySelector("[data-header]");
     header && header.classList.add("active");
   </script>
+  <script src="../scripts/navbar-toggle"></script>
 </BaseLayout>
