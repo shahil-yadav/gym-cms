@@ -1,0 +1,35 @@
+---
+import Product from "./Product.astro";
+const { title, sectionTitle, items } = Astro.props;
+---
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5%;
+    row-gap: 1rem;
+  }
+  .container {
+    margin-top: 20px;
+  }
+  .scrollbar-item {
+    width: 33%;
+  }
+</style>
+
+<section class="section blog" id="products" aria-label="products">
+  <div class="container">
+    <p class="section-subtitle">{sectionTitle}</p>
+    <h2 class="h2 section-title text-center">{title}</h2>
+    <ul>
+      {
+        items.map((item: any) => (
+          <li class="scrollbar-item">
+            <Product item={item} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

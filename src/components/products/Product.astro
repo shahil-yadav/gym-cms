@@ -1,0 +1,58 @@
+---
+/*
+ *  @param
+    item : {
+        availFrom?: string;
+        description: string;
+        name:string;
+        imageSrc:string;
+    }   
+*/
+const { item } = Astro.props;
+---
+
+<div class="blog-card">
+  <div class="card-banner img-holder" style="--width: 440; --height: 270;">
+    <img
+      src={item.imageSrc}
+      width="440"
+      height="270"
+      loading="lazy"
+      alt={item.name}
+      class="img-cover"
+    />
+    {
+      (
+        <time class="card-meta" datetime={item.availFrom}>
+          {item.availFrom ? (
+            <>
+              <p>Availaible from</p>
+              <p>{item.availFrom}</p>
+            </>
+          ) : (
+            "Item in Stock"
+          )}
+        </time>
+      )
+    }
+  </div>
+
+  <div class="card-content">
+    <h3 class="h3">
+      <a href="#" class="card-title">
+        {item.name}
+      </a>
+    </h3>
+
+    <p class="card-text" set:html={item.description} />
+
+    <span class="flex-center">
+      <a
+        href="https://wa.me/917985452541?text=Hello,%20I%20came%20from%20your%20gym%20website"
+        class="btn-link has-before"
+      >
+        Enquire About
+      </a>
+    </span>
+  </div>
+</div>

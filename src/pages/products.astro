@@ -1,0 +1,53 @@
+---
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { EntryFieldTypes } from "contentful";
+import CardContainer from "../components/products/CardContainer.astro";
+import BaseLayout from "../layout/BaseLayout.astro";
+import { contentfulClient } from "../lib/contentful";
+import { Item } from "../utils/class";
+
+interface Products {
+  contentTypeId: "products";
+  fields: {
+    name: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
+    imageSrc: EntryFieldTypes.AssetLink;
+    availFrom: EntryFieldTypes.Date;
+  };
+}
+
+const entries = await contentfulClient.getEntries<Products>({
+  content_type: "products",
+});
+
+const products = await Promise.all(
+  entries.items.map(async (item) => {
+    const { imageSrc, availFrom = "", description, name } = item.fields;
+    const imageId = imageSrc.sys.id;
+    const asset = await contentfulClient.getAsset(imageId);
+
+    let date = "";
+    if (availFrom) date = new Date(availFrom).toLocaleDateString();
+
+    if (!asset)
+      return new Item(date, documentToHtmlString(description), name, "");
+    else
+      return new Item(
+        date,
+        documentToHtmlString(description),
+        name,
+        `https:${asset.fields.file?.url}`
+      );
+  })
+);
+---
+
+<BaseLayout>
+  <main>
+    <CardContainer
+      sectionTitle="Nutrition & Proteins"
+      title="Products"
+      items={products}
+    />
+  </main>
+</BaseLayout>

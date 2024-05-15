@@ -1,0 +1,20 @@
+---
+import About from "../components/index/About.astro";
+import BaseLayout from "../layout/BaseLayout.astro";
+import Blog from "../components/index/Blog.astro";
+import Class from "../components/index/Class.astro";
+import Hero from "../components/index/Hero.astro";
+import Video from "../components/index/Video.astro";
+---
+
+<BaseLayout>
+  <main>
+    <article>
+      <Hero />
+      <About />
+      <Video />
+      <Class />
+      <Blog />
+    </article>
+  </main>
+</BaseLayout>
